@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> EKANSH SIMGEKAR - High School Portfolio </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <h1> EKANSH SIMGEKAR </h1>
+</header>
+
+<nav>
+    <a href="#about">About Me</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Resume & Contact</a>
+</nav>
+
+<section id="about">
+    <h2>About Me</h2>
+    <p>
+        Hello! My name is Ekansh Simgekar, a student enrolled in the academy of Computer and Information Sciences. 
+        At my time at this school, I have learnt languages like Python, C++, HTML, CSS, and Java. I developed my 
+        avid interest in engineering through learning Arduino and working on my schools robotics team as a leader. 
+        Related to those, I have expeirience in putting things together, using tinkerCad or onshape, and the 
+        engineering design procress. My involvment in robotics and TSA (technological student association) pushed 
+        to develop good communication skills and expressing large .csv files onto graphical techology. With all that
+        being said, my interest is in the field of mechanical engineering. 
+    </p>
+</section>
+
+<section id="projects">
+    <h2>Project Showcase</h2>
+
+    <!-- PROJECT 1 -->
+    <div class="project">
+        <h3> Joystick Controlled Prosthetic Hand</h3>
+        <p>
+            A cardboard hand that contains Arduino to indivdiually move each of the hands fingers. The joystick is 
+            directly wired to a breadboard that is linked to two mini servos. Each of those servos controlls two to
+            three fingers with strings to simulate muscle fibers. This project started as a way to explore the 
+            possibilties of Arduino while making something that I found interesting! 
+        </p>
+
+        <p class="stack"><strong>Technical Stack:</strong> C++, Arduino, and TinkerCAD </p>
+
+        <h4>Process & Challenges</h4>
+        <ul>
+            <li> Created the cardboard hardware and used my prior knowledge to implement a minimal software. </li>
+            <li> Designed the project on TinkerCad to approach  and eliminate possible errors. </li>
+            <li> Faced challenges related to how to move the fingers with low powered servos, overcame from researching similar projects.</li>
+        </ul>
+
+        <h4>Code Snippet</h4>
+        <pre>
+def add_task(tasks, description):
+    task = {"id": len(tasks) + 1, "description": description, "done": False}
+    tasks.append(task)
+    print("Task added:", task["description"])           
+        </pre>
+
+        <p><strong>Artifacts:</strong> Screenshot of CLI output, GitHub repository link.</p>
+    </div>
+
+    <!-- PROJECT 2 -->
+    <div class="project">
+        <h3>Smart Room Temperature Monitor</h3>
+        <p>
+            A physical computing project using an Arduino and a DHT sensor to measure
+            temperature and humidity. The system displays readings on an LCD and activates
+            an LED when values exceed a set threshold.
+        </p>
+
+        <p class="stack"><strong>Technical Stack:</strong> Arduino C++, DHT11 sensor, LCD display</p>
+
+        <h4>Process & Challenges</h4>
+        <ul>
+            <li>Built and tested the circuit on a breadboard.</li>
+            <li>Calibrated temperature thresholds for alerts.</li>
+            <li>Resolved unstable sensor readings by averaging multiple samples.</li>
+        </ul>
+
+        <h4>Code Snippet</h4>
+        <pre>
+float temperature = dht.readTemperature();
+    if (temperature > 26 || temperature < 18) {
+        digitalWrite(alertLED, HIGH);
+    } else {
+        digitalWrite(alertLED, LOW);
+        }
+        </pre>
+
+        <p><strong>Artifacts:</strong> Demo video, wiring photo, GitHub repository link.</p>
+    </div>
+
+    <!-- PROJECT 3 -->
+    <div class="project">
+        <h3>Study Timer GUI</h3>
+        <p>
+            A Python desktop application that helps students manage study sessions and breaks.
+            The interface includes a countdown timer, start/pause controls, and visual alerts.
+        </p>
+
+        <p class="stack"><strong>Technical Stack:</strong> Python, Tkinter</p>
+
+        <h4>Process & Challenges</h4>
+        <ul>
+            <li>Designed a simple and readable layout.</li>
+            <li>Separated timer logic from the GUI for easier debugging.</li>
+            <li>Fixed timing issues caused by overlapping Tkinter events.</li>
+        </ul>
+
+        <h4>Code Snippet</h4>
+        <pre>
+            def countdown(seconds):
+                mins, secs = divmod(seconds, 60)
+                timer_label.config(text=f"{mins:02d}:{secs:02d}")
+                root.after(1000, countdown, seconds - 1)
+        </pre>
+
+        <p><strong>Artifacts:</strong> GUI screenshot, GitHub repository link.</p>
+    </div>
+
+    <!-- PROJECT 4 -->
+    <div class="project">
+        <h3>Data Log Analyzer</h3>
+        <p>
+            A Python script that reads log files and summarizes key information such as
+            error counts and timestamps. Useful for troubleshooting and performance checks.
+        </p>
+
+        <p class="stack"><strong>Technical Stack:</strong> Python, File I/O, statistics module</p>
+
+        <h4>Process & Challenges</h4>
+        <ul>
+            <li>Created a parser that handles malformed lines safely.</li>
+            <li>Tested the script with multiple log formats.</li>
+            <li>Added summary reporting for easier interpretation.</li>
+        </ul>
+
+        <h4>Code Snippet</h4>
+        <pre>
+def parse_line(line):
+    try:
+        time, level, msg = line.split(" | ", 2)
+        return {"time": time, "level": level, "msg": msg}
+    except:
+        return None
+        </pre>
+
+        <p><strong>Artifacts:</strong> Terminal screenshot, GitHub repository link.</p>
+    </div>
+
+</section>
+
+<section id="contact">
+    <h2>Resume & Contact</h2>
+    <p><strong>Email:</strong> ekansh.simgekar@mcvts.org </p>
+    <p><strong>GitHub:</strong> https://github.com/magicKansh</p>
+    <p><strong>Resume (PDF):</strong> Add your link here</p>
+</section>
+
+<footer>
+    <p> Ekansh Simgekar – High School Portfolio</p>
+</footer>
+
+</body>
+</html>
