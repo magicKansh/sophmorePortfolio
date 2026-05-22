@@ -55,18 +55,42 @@
 
         <h4>Code Snippet</h4>
         <pre>
-def add_task(tasks, description):
-    task = {"id": len(tasks) + 1, "description": description, "done": False}
-    tasks.append(task)
-    print("Task added:", task["description"])           
+#include <Servo.h>
+
+Servo servo1;
+Servo servo2;
+
+void setup() {
+  Serial.begin(9600);
+  servo1.attach(7);
+  servo2.attach(8);
+
+  pinMode(6, INPUT_PULLUP);  
+}
+
+void loop() {
+  int joystickValueX = analogRead(A0);
+  int joystickValueY = analogRead(A1);
+  int pushPin = digitalRead(6);
+
+  int servoAngle = map(joystickValueX, 0, 1023, 0, 180);
+  int servoAngle2 = map(joystickValueY, 0, 1023, 0, 180);
+  servo1.write(servoAngle);
+  servo2.write(servoAngle2);
+
+  if (pushPin == LOW) {  // button pressed
+    servo1.write(180);
+    servo2.write(180);
+    delay(1000);
+  }
+}    
         </pre>
 
         <p><strong>Artifacts:</strong></p>
         <div class="project-artifacts">
             <a href="https://docs.google.com/presentation/d/1TC9spTNmw4XEXiRIFN0Adl8-0rSRTootbSmiq-QF7CA/edit?slide=id.p#slide=id.p" target="_blank">Project Documentation</a> | 
-            <a href="https://github.com/magicKansh" target="_blank">GitHub Repository</a>
             <div class="screenshot-container" style="margin-top: 10px;">
-                <img src="prosthetic-documentation.jpg" alt="Screenshot of project documentation" style="max-width: 100%; height: auto; margin-bottom: 10px;">
+                <img src="prosthetic-documentation.jpg" alt="Screenshot of Project" style="max-width: 100%; height: auto; margin-bottom: 10px;">
                 <p><em>[Link/Embed your product video here]</em></p>
             </div>
         </div>
@@ -92,14 +116,9 @@ def add_task(tasks, description):
             <li> Issues with material and ability led to many adjustments to the CAD that needed to be done by me. </li>
         </ul>
 
-        <h4>Code Snippet</h4>
+        <h4> Video of CAD </h4>
         <pre>
-float temperature = dht.readTemperature();
-    if (temperature > 26 || temperature < 18) {
-        digitalWrite(alertLED, HIGH);
-    } else {
-        digitalWrite(alertLED, LOW);
-        }
+
         </pre>
 
         <p><strong>Artifacts:</strong></p>
@@ -132,10 +151,30 @@ float temperature = dht.readTemperature();
 
         <h4>Code Snippet</h4>
         <pre>
-            def countdown(seconds):
-                mins, secs = divmod(seconds, 60)
-                timer_label.config(text=f"{mins:02d}:{secs:02d}")
-                root.after(1000, countdown, seconds - 1)
+import rasterio
+import matplotlib.pyplot as plt
+import numpy as np
+
+heatmap_raster_path = "C:\\Users\\echoe\\OneDrive\\Desktop\\Geospatial Tech 25-26\\heat_map-main\\heat_map-main\\data\\output\\f_deviation_smooth.tif"
+with rasterio.open(heatmap_raster_path) as src:
+    heat_map = src.read(1)
+    
+    if src.nodata is not None:
+        heat_map = np.ma.masked_equal(heat_map, src.nodata)
+    else:
+        heat_map = np.ma.masked_less(heat_map, -100)
+
+    plt.figure(figsize=(9, 8))
+    
+
+    plt.imshow(heat_map, cmap='turbo')
+    
+    plt.title("NYC Urban Heat Map (Mean Surface Temperature 2020–2022)")
+    
+    plt.colorbar(label="Deviation from the Mean")
+    plt.tight_layout()
+    plt.grid()
+    plt.show()
         </pre>
 
         <p><strong>Artifacts:</strong></p>
@@ -164,20 +203,14 @@ float temperature = dht.readTemperature();
             <li> Managed to get a working robot with the help of peers and online tutorials. </li>
         </ul>
 
-        <h4>Code Snippet</h4>
+        <h4> Pictures of Robot </h4>
         <pre>
-def parse_line(line):
-    try:
-        time, level, msg = line.split(" | ", 2)
-        return {"time": time, "level": level, "msg": msg}
-    except:
-        return None
+
         </pre>
 
-        <p><strong>Artifacts:</strong> Pictures of Robot and Team</p>
+        <p><strong>Artifacts:</strong> Link to robotics instagram</p>
         <div class="screenshot-container">
-            <img src="robot-wyatt.jpg" alt="Picture of Robot Wyatt" style="max-width: 100%; height: auto; margin-bottom: 10px;">
-            <img src="robot-team.jpg" alt="Picture of Robotics Team" style="max-width: 100%; height: auto;">
+            
         </div>
     </div>
 
