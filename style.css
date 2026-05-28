@@ -1,36 +1,88 @@
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f8e3b6;
+
+    background: linear-gradient(
+        to bottom,
+        #fff3e0 0%,   /* light cream */
+        #f8e3b6 30%,  /* your main tan */
+        #eac58a 65%,  /* medium tan */
+        #d9b06a 100%  /* deeper golden tan */
+    );
+
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+
     color: #35613e;
 }
 
+
+
+/* ===========================
+   HEADER WITH BACKGROUND IMAGE
+   =========================== */
+/* HEADER — solid dark blue behind your name */
 header {
     background: #1e293b;
-    color: rgb(235, 219, 150);
-    padding: 5px;
+    padding: 20px;
     text-align: center;
+    color: rgb(235, 219, 150);
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 35px;
 }
 
+/* NAVBAR — solid dark blue behind the links */
 nav {
     background: #1e293b;
-    padding: 5px;
+    padding: 10px;
     text-align: center;
 }
 
-nav a {
-    color: #517a49;
-    margin: 0 15px;
+/* --- Sliding Underline Animation --- */
+nav a,
+nav a:link,
+nav a:visited {
+    position: relative;
+    color: #e9d8a6;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 600;
+    margin: 0 18px;
+    padding: 4px 0;
+    transition: color 0.3s ease;
 }
 
-nav a:hover {
-    color: rgb(87, 67, 67);
+nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0%;
+    height: 2px;
+    background: #fefae0;
+    transition: width 0.3s ease;
 }
 
+nav a:hover,
+nav a:hover:visited {
+    color: #fff8d6;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+nav a:active {
+    color: #fff3b0;
+}
+
+/* ===========================
+   PAGE LAYOUT
+   =========================== */
 section {
     max-width: 900px;
     margin: 40px auto;
@@ -42,6 +94,9 @@ h2 {
     padding-bottom: 5px;
 }
 
+/* ===========================
+   PROJECT CARD
+   =========================== */
 .project {
     background: #e4cb9a;
     padding: 20px;
@@ -63,6 +118,9 @@ pre {
     overflow-x: auto;
 }
 
+/* ===========================
+   FOOTER
+   =========================== */
 footer {
     text-align: center;
     padding: 20px;
@@ -71,22 +129,24 @@ footer {
     margin-top: 40px;
 }
 
+/* ===========================
+   ARTIFACTS
+   =========================== */
 .project-artifacts,
 .project-artifacts img,
 .project-artifacts video,
 .screenshot-container {
     display: block;
-    margin: 20px auto;        
+    margin: 20px auto;
     text-align: center;
 }
 
-
 .project-artifacts img,
 .project-artifacts video {
-    border: 2px solid black;  
+    border: 2px solid black;
     border-radius: 4px;
     padding: 4px;
-    max-width: 100%;       
+    max-width: 100%;
     height: auto;
 }
 
