@@ -1,5 +1,19 @@
+/* ===========================
+   GLOBAL RESETS & UX FIXES
+   =========================== */
+*, *::before, *::after {
+    box-sizing: border-box; /* Makes padding/border math stable and predictable */
+}
+
 html {
     scroll-behavior: smooth;
+    scrollbar-gutter: stable; /* Prevents layout shifting when scrollbars appear */
+}
+
+/* Custom text selection colors matching your theme */
+::selection {
+    background-color: #eac58a;
+    color: #1e293b;
 }
 
 body {
@@ -35,15 +49,15 @@ nav::before {
        content: "";
        position: absolute;
        inset: 0;
-       background: rgba(30, 41, 59, 0.55);
+       background: rgba(10, 25, 47, 0.75); /* Darker, richer blue tint overlay */
        z-index: 0;
 }
    
 header {
-       padding: 20px 0 0 0; /* remove bottom gap */
+       padding: 15px 0 0 0; /* Reduced top padding for a smaller footprint */
        text-align: center;
        color: #f8e3b6;
-       font-size: 2.5rem;
+       font-size: 1.8rem;     /* Shrunk text size from original 2.5rem */
        font-weight: bold;
        border-bottom: 3px solid #f8e3b6; 
 }
@@ -60,7 +74,7 @@ nav a {
 }
    
 /* ===========================
-   NAVIGATION
+   NAVIGATION LINKS
    =========================== */
 nav {
     padding: 10px;
@@ -103,17 +117,6 @@ nav a:active {
 }
 
 /* ===========================
-   HEADER
-   =========================== */
-header {
-    padding: 1px 0;
-    text-align: center;
-    color: #f8e3b6;
-    font-size: 2.5rem;
-    font-weight: bold;
-}
-
-/* ===========================
    PAGE LAYOUT
    =========================== */
 section {
@@ -149,18 +152,7 @@ pre {
 }
 
 /* ===========================
-   FOOTER
-   =========================== */
-footer {
-    text-align: center;
-    padding: 20px;
-    background: #1e293b;
-    color: white;
-    margin-top: 40px;
-}
-
-/* ===========================
-   PROJECT MEDIA
+   PROJECT MEDIA & CENTERED BUTTONS
    =========================== */
 .project-artifacts,
 .project-artifacts img,
@@ -173,6 +165,7 @@ footer {
 
 .project-artifacts img,
 .project-artifacts video {
+    display: block; /* Fixed: ensures auto margin centering triggers correctly */
     border: 2px solid black;
     border-radius: 4px;
     padding: 4px;
@@ -186,6 +179,42 @@ footer {
     border: 2px solid black;
     border-radius: 4px;
     padding: 4px;
+}
+
+/* Tiny, centered link buttons sitting directly under the media */
+.project-artifacts a,
+.screenshot-container a {
+    display: inline-block;    
+    margin: 15px auto 0 auto; 
+    clear: both;              
+    white-space: nowrap; /* Prevents text splitting across two lines */
+    
+    /* Small Button Styling */
+    padding: 4px 10px;        
+    background-color: #1e293b; 
+    color: #f8e3b6 !important; 
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.75rem; /* Noticeably smaller than the 0.9rem artifact font */       
+    letter-spacing: 0.5px;     
+    border-radius: 4px;        
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+}
+
+/* Button Hover State */
+.project-artifacts a:hover,
+.screenshot-container a:hover {
+    background-color: #2e3d52; 
+    color: #ffffff !important;  
+    border-color: #d9b06a;     
+    transform: translateY(-1px); 
+}
+
+/* Button Click/Active State */
+.project-artifacts a:active,
+.screenshot-container a:active {
+    transform: translateY(0); 
 }
 
 /* ===========================
@@ -206,4 +235,15 @@ footer {
     height: auto;
     border-radius: 12px;
     object-fit: cover;
+}
+
+/* ===========================
+   FOOTER
+   =========================== */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #1e293b;
+    color: white;
+    margin-top: 40px;
 }
