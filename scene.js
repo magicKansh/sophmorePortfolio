@@ -14,7 +14,7 @@
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
     camera.position.set(7, 6, 11);
-    camera.lookAt(1.2, -0.3, 0);
+    camera.lookAt(1.5, 0.9, 0);
 
     function gearShape(teeth, outer, root) {
         const shape = new THREE.Shape();
