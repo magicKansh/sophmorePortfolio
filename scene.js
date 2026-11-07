@@ -1,120 +1,99 @@
-// Line drawing of two meshing spur gears, like a CAD viewport.
-// Drag to rotate the view. Hidden if three.js or WebGL is unavailable.
+// FIG. 1: two meshing spur gears drawn as line work, like a CAD viewport.
 (function () {
     const canvas = document.getElementById('gears');
-    const fail = () => document.documentElement.classList.add('no-3d');
-    if (!canvas || typeof THREE === 'undefined') return fail();
+    if (!canvas || typeof THREE === 'undefined') return;
 
     let renderer;
     try {
         renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
     } catch (e) {
-        return fail();
+        return;
     }
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
-    camera.position.set(0, 0, 24);
+    const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
+    camera.position.set(7, 6, 11);
+    camera.lookAt(1.2, -0.3, 0);
 
-    // Spur gear outline with simple trapezoid teeth, extruded and drawn as edges.
-    // module m sets tooth size; pitch radius = teeth * m / 2.
-    const m = 0.36;
-    function gear(teeth, color) {
-        const r = (teeth * m) / 2;
-        const outer = r + m;
-        const root = r - 1.25 * m;
-        const step = (Math.PI * 2) / teeth;
+    function gearShape(teeth, outer, root) {
         const shape = new THREE.Shape();
+        const step = (Math.PI * 2) / teeth;
         for (let i = 0; i < teeth; i++) {
             const a = i * step;
-            const pts = [
-                [root, a - step * 0.25],
-                [outer, a - step * 0.12],
-                [outer, a + step * 0.12],
-                [root, a + step * 0.25]
-            ];
-            pts.forEach(([rad, t], j) => {
-                const x = Math.cos(t) * rad, y = Math.sin(t) * rad;
-                if (i === 0 && j === 0) shape.moveTo(x, y); else shape.lineTo(x, y);
-            });
+            [[root, a], [outer, a + step * 0.18], [outer, a + step * 0.42], [root, a + step * 0.6]]
+                .forEach(([r, t], j) => {
+                    const x = Math.cos(t) * r, y = Math.sin(t) * r;
+                    (i === 0 && j === 0) ? shape.moveTo(x, y) : shape.lineTo(x, y);
+                });
         }
         shape.closePath();
         const bore = new THREE.Path();
-        bore.absarc(0, 0, m * 1.4, 0, Math.PI * 2, true);
+        bore.absarc(0, 0, root * 0.28, 0, Math.PI * 2, true);
         shape.holes.push(bore);
-
-        const geo = new THREE.ExtrudeGeometry(shape, { depth: 0.6, bevelEnabled: false, curveSegments: 32 });
-        geo.translate(0, 0, -0.3);
-        const group = new THREE.Group();
-        group.add(new THREE.LineSegments(new THREE.EdgesGeometry(geo, 20), new THREE.LineBasicMaterial({ color })));
-
-        // shaft
-        const shaft = new THREE.CylinderGeometry(m * 1.4, m * 1.4, 3, 24, 1, true);
-        shaft.rotateX(Math.PI / 2);
-        group.add(new THREE.LineSegments(new THREE.EdgesGeometry(shaft, 30), new THREE.LineBasicMaterial({ color: 0x8a8a8a })));
-        return { group, r };
+        return shape;
     }
 
-    const big = gear(14, 0x141414);
-    const small = gear(10, 0xc4161c);
-    const rig = new THREE.Group();
-    rig.add(big.group, small.group);
-    const center = big.r + small.r;
-    big.group.position.x = -center * 0.42;
-    small.group.position.x = center * 0.58;
-    scene.add(rig);
+    function gear(teeth, outer, root, color) {
+        const geo = new THREE.ExtrudeGeometry(gearShape(teeth, outer, root), {
+            depth: 0.6, bevelEnabled: false, curveSegments: 32
+        });
+        geo.translate(0, 0, -0.3);
+        const group = new THREE.Group();
+        // white faces hide the back edges, so it reads like a solid model
+        group.add(new THREE.Mesh(geo, new THREE.MeshBasicMaterial({
+            color: 0xf7f5ef, polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 1
+        })));
+        group.add(new THREE.LineSegments(new THREE.EdgesGeometry(geo, 20),
+            new THREE.LineBasicMaterial({ color })));
+        // shaft
+        const shaft = new THREE.CylinderGeometry(root * 0.28, root * 0.28, 2.4, 32);
+        shaft.rotateX(Math.PI / 2);
+        group.add(new THREE.LineSegments(new THREE.EdgesGeometry(shaft, 30),
+            new THREE.LineBasicMaterial({ color: 0x8a867c })));
+        return group;
+    }
 
-    // starting view: tilted, like an isometric CAD view
-    const view = { x: -0.55, y: 0.6 };
-    let dragging = false, lastX = 0, lastY = 0;
-    canvas.addEventListener('pointerdown', e => { dragging = true; lastX = e.clientX; lastY = e.clientY; canvas.setPointerCapture(e.pointerId); });
-    canvas.addEventListener('pointermove', e => {
-        if (!dragging) return;
-        view.y += (e.clientX - lastX) * 0.01;
-        view.x += (e.clientY - lastY) * 0.01;
-        view.x = Math.max(-1.5, Math.min(1.5, view.x));
-        lastX = e.clientX; lastY = e.clientY;
-        if (still) draw(); // keep dragging responsive even with reduced motion
-    });
-    const stop = () => { dragging = false; };
-    canvas.addEventListener('pointerup', stop);
-    canvas.addEventListener('pointercancel', stop);
+    // 14T and 10T gears; centers spaced so the teeth mesh
+    const big = gear(14, 2.1, 1.75, 0x151515);
+    const small = gear(10, 1.5, 1.15, 0xd9480f);
+    small.position.set(3.25, 0, 0);
+    const assembly = new THREE.Group();
+    assembly.add(big, small);
+    assembly.rotation.x = -0.25;
+    scene.add(assembly);
+
+    // center line through both shafts, like a drawing
+    const centerLine = new THREE.Line(
+        new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(-3, 0, 0), new THREE.Vector3(5.6, 0, 0)]),
+        new THREE.LineDashedMaterial({ color: 0x8a867c, dashSize: 0.3, gapSize: 0.15 })
+    );
+    centerLine.computeLineDistances();
+    assembly.add(centerLine);
 
     function resize() {
         const w = canvas.clientWidth, h = canvas.clientHeight;
-        if (!w || !h) return;
         renderer.setSize(w, h, false);
         camera.aspect = w / h;
         camera.updateProjectionMatrix();
     }
+    window.addEventListener('resize', resize);
+    resize();
 
     const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let angle = 0, visible = true;
+    let visible = true;
     new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(canvas);
 
-    function draw() {
-        resize();
-        big.group.rotation.z = angle;
-        // meshing: opposite direction at the tooth ratio, offset half a tooth so teeth interlock
-        small.group.rotation.z = -angle * (14 / 10) + Math.PI / 10;
-        rig.rotation.x = view.x;
-        rig.rotation.y = view.y;
-        renderer.render(scene, camera);
-    }
-
+    let angle = 0.1;
     function frame() {
         if (visible) {
-            angle += 0.006;
-            draw();
+            angle += 0.004;
+            big.rotation.z = angle;
+            small.rotation.z = -angle * (14 / 10) + Math.PI / 10;
+            assembly.rotation.y = Math.sin(angle * 0.8) * 0.25;
+            renderer.render(scene, camera);
         }
-        requestAnimationFrame(frame);
+        if (!still) requestAnimationFrame(frame);
     }
-
-    if (still) {
-        draw();
-        window.addEventListener('resize', draw);
-    } else {
-        frame();
-    }
+    frame();
 })();

@@ -4,316 +4,315 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ekansh Simgekar</title>
-    <meta name="description" content="Projects and awards from Ekansh Simgekar, a high school junior in New Jersey working on robotics, prosthetics, and data.">
+    <meta name="description" content="Ekansh Simgekar: robotics, prosthetic hands, wildfire monitoring, and data projects.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<a class="skip" href="#main">Skip to content</a>
+<a class="skip" href="#work">Skip to projects</a>
 
-<nav class="nav" aria-label="Main">
-    <a class="nav-name" href="#top">Ekansh Simgekar</a>
-    <div class="nav-links">
-        <a href="#projects">Projects</a>
-        <a href="#awards">Awards</a>
-        <a href="#activities">Activities</a>
+<header class="masthead">
+    <a class="name-small" href="#top">Ekansh Simgekar</a>
+    <nav aria-label="Main">
+        <a href="#work">Work</a>
+        <a href="#record">Record</a>
         <a href="#contact">Contact</a>
-    </div>
-</nav>
+    </nav>
+</header>
 
-<main id="main">
+<main>
 
-<header class="intro" id="top">
+<section class="intro" id="top">
     <div class="intro-text">
         <h1>Ekansh Simgekar</h1>
         <p class="lede">
-            I'm a junior in the Academy of Computer and Information Sciences at Morris County School of Technology
-            in Denville, New Jersey. I'm president of our robotics team, and I want to study mechatronics engineering.
+            Junior at Morris County School of Technology, robotics team president, and someone who
+            would rather build the thing than read about it. Most of what I make sits where code
+            meets motors.
         </p>
-        <p>
-            Most of what I make is some mix of CAD, wiring, and code. I started with a cardboard hand driven by two
-            servos and a joystick. Since then I've worked on our FRC robot's swerve drive, a wildfire-monitoring
-            system built on Raspberry Pis, and a map-based analysis of heat across New York City.
-        </p>
-        <p class="intro-links">
-            <a href="#projects">See projects</a>
-            <a href="mailto:ekansh.simgekar@mcvts.org">ekansh.simgekar@mcvts.org</a>
-        </p>
+        <dl class="facts">
+            <div><dt>Studying</dt><dd>Computer &amp; Information Sciences academy</dd></div>
+            <div><dt>Headed toward</dt><dd>Mechatronics engineering</dd></div>
+            <div><dt>Class of</dt><dd>2028</dd></div>
+        </dl>
     </div>
-    <figure class="viewer" id="viewer">
-        <canvas id="gears" aria-label="A 3D line drawing of two meshing spur gears" role="img"></canvas>
-        <figcaption>Fig. 1. A 14-tooth gear driving a 10-tooth gear, a 1.4 : 1 ratio. Drag to rotate.</figcaption>
-    </figure>
-</header>
 
-<!-- ============ PROJECTS ============ -->
-<section id="projects">
-    <h2>Projects</h2>
+    <figure class="drawing">
+        <canvas id="gears" aria-label="Rotating line drawing of two meshing gears"></canvas>
+        <figcaption class="titleblock">
+            <span>FIG. 1</span>
+            <span>Spur gear pair, 14T : 10T</span>
+            <span>Drawn in three.js</span>
+        </figcaption>
+    </figure>
+</section>
+
+<!-- ================= WORK ================= -->
+<section id="work">
+    <h2>Work</h2>
 
     <article class="project">
         <div class="project-meta">
-            <span class="project-num">01</span>
-            <span>Winter to spring 2026</span>
-            <span>Wiring, swerve drive, hand tools</span>
+            <p class="year">2026</p>
+            <p class="role">Mechanical lead, wiring</p>
         </div>
         <div class="project-body">
             <h3>Wyatt, our FRC robot</h3>
             <p>
-                Wyatt is the robot my team built for the 2026 FIRST Robotics Competition season. It drives on a swerve
-                drive with four modules, each using a NEO motor and a NEO 550, and it has a shooter for the
-                dodgeball-sized game pieces. The game was basically basketball for robots: score in the hoops and
-                block the other alliance. We placed 8th at our first FIRST Mid-Atlantic event, and I received the
-                Rising All-Star Award.
+                A swerve-drive robot with four modules, each run by a NEO and a NEO 550, plus a shooter for
+                the dodgeball-sized game pieces. The 2026 FIRST Mid-Atlantic game was more or less basketball
+                for robots. I spent most of the season on wiring, which meant checking every connection twice
+                and learning to ask for help before a deadline instead of after. We placed 8th at our first
+                event, and I received the Rising All-Star Award.
             </p>
-            <p>
-                My main job was wiring. It was new to me, and I learned it the hard way: when a wire fused two weeks
-                before an event, I finally asked our mentor for help, and we split the work into pieces we could
-                actually finish. The season took about 10 hours a week.
-            </p>
-            <figure class="media media-narrow">
-                <img src="trophy.png" alt="The 2026 Rising All-Star Award trophy on its base, outdoors">
-                <figcaption>The Rising All-Star Award, FIRST Mid-Atlantic, 2026.</figcaption>
-            </figure>
+            <p class="stack">Swerve drive · Wiring · Hand tools</p>
+            <img src="trophy.png" alt="The 2026 Rising All-Star Award trophy on a concrete step" class="figure tall">
             <p class="links"><a href="https://www.instagram.com/mcst.robotics/" target="_blank" rel="noopener">Team Instagram</a></p>
         </div>
     </article>
 
     <article class="project">
         <div class="project-meta">
-            <span class="project-num">02</span>
-            <span>Summer 2025 and winter 2026</span>
-            <span>C++, Arduino, TinkerCAD, Onshape</span>
+            <p class="year">2026</p>
+            <p class="role">Congressional App Challenge, team</p>
         </div>
         <div class="project-body">
-            <h3>Joystick-controlled prosthetic hands</h3>
+            <h3>FireWatch</h3>
             <p>
-                The first version is a cardboard hand. A joystick on a breadboard drives two mini servos, and each
-                servo pulls strings, like tendons, that curl two or three fingers. The servos were barely strong
-                enough, so I read through similar builds to work out better string routing. I laid out the circuit
-                in TinkerCAD before wiring anything.
+                A wildfire monitor built around Raspberry Pi cameras and an MLX90640 thermal sensor. When a
+                device sees unusual heat or smoke-like changes (OpenCV), it reports to a FastAPI server, which
+                puts the event on a map next to NASA FIRMS satellite detections and routes drivers, cyclists,
+                or walkers around the hotspots. Detection can be wrong, so the camera's owner confirms each
+                alert before it counts. Next step is testing on real hardware outdoors.
             </p>
+            <p class="stack">Python · FastAPI · OpenCV · Raspberry Pi · OpenRouteService</p>
+            <p class="links">
+                <a href="https://firewatch-deployment.onrender.com" target="_blank" rel="noopener">Live site</a>
+                <a href="https://github.com/magicKansh/firewatch_deployment" target="_blank" rel="noopener">Source</a>
+            </p>
+        </div>
+    </article>
+
+    <article class="project">
+        <div class="project-meta">
+            <p class="year">2026</p>
+            <p class="role">Solo, Hack Club Fallout</p>
+        </div>
+        <div class="project-body">
+            <h3>Prosthetic hand, second version</h3>
             <p>
-                For the second version, made through Hack Club's Fallout program (60 hours), I switched to NEMA 17
-                stepper motors and designed the parts in Onshape. The fingers hardly moved at first. Redesigning the
-                strings inside each finger so they pulled tighter fixed it. Next I want to add force sensors to the
-                fingertips so the hand knows how hard it is gripping.
+                I rebuilt the hand around NEMA 17 stepper motors for more pull and designed the parts in
+                Onshape. About 60 hours in total. The first prints barely moved the fingers, so I rerouted
+                the strings inside each finger to pull tighter. Next I want force sensors in the fingertips
+                so the grip can adjust itself.
             </p>
-            <figure class="media">
-                <video controls preload="metadata">
-                    <source src="hand.mp4" type="video/mp4">
-                </video>
-                <figcaption>Version 1 opening and closing its fingers.</figcaption>
-            </figure>
+            <p class="stack">C++ · Arduino · Stepper motors · Onshape</p>
+        </div>
+    </article>
+
+    <article class="project">
+        <div class="project-meta">
+            <p class="year">2025</p>
+            <p class="role">Solo</p>
+        </div>
+        <div class="project-body">
+            <h3>Prosthetic hand, first version</h3>
+            <p>
+                Cardboard, two mini servos, strings for tendons, and a joystick. Each servo pulls two or three
+                fingers, and pressing the joystick closes the whole hand. The servos were underpowered, which
+                is what pushed me toward steppers for version two.
+            </p>
+            <p class="stack">C++ · Arduino · TinkerCAD</p>
+            <video class="figure" controls preload="metadata">
+                <source src="hand.mp4" type="video/mp4">
+            </video>
             <details>
-                <summary>Version 1 Arduino code</summary>
-<pre><code>#include &lt;Servo.h&gt;  // servo library
+                <summary>Arduino code</summary>
+<pre><code>#include &lt;Servo.h&gt;
 
 Servo servo1;
 Servo servo2;
 
 void setup() {
-  Serial.begin(9600);        // serial monitor for debugging
+  Serial.begin(9600);
   servo1.attach(7);
   servo2.attach(8);
-  pinMode(6, INPUT_PULLUP);  // joystick button
+  pinMode(6, INPUT_PULLUP);   // joystick button
 }
 
 void loop() {
-  int joystickValueX = analogRead(A0);  // horizontal
-  int joystickValueY = analogRead(A1);  // vertical
-  int pushPin = digitalRead(6);
+  int x = analogRead(A0);     // 0-1023
+  int y = analogRead(A1);
 
-  // joystick position (0-1023) to servo angle (0-180)
-  int servoAngle = map(joystickValueX, 0, 1023, 0, 180);
-  int servoAngle2 = map(joystickValueY, 0, 1023, 0, 180);
-  servo1.write(servoAngle);
-  servo2.write(servoAngle2);
+  servo1.write(map(x, 0, 1023, 0, 180));
+  servo2.write(map(y, 0, 1023, 0, 180));
 
-  if (pushPin == LOW) {  // button pressed: close the hand fully
+  if (digitalRead(6) == LOW) {  // button pressed: full grip
     servo1.write(180);
     servo2.write(180);
     delay(1000);
   }
 }</code></pre>
             </details>
-            <p class="links"><a href="https://docs.google.com/presentation/d/1TC9spTNmw4XEXiRIFN0Adl8-0rSRTootbSmiq-QF7CA/edit?slide=id.p#slide=id.p" target="_blank" rel="noopener">Version 1 documentation</a></p>
+            <p class="links"><a href="https://docs.google.com/presentation/d/1TC9spTNmw4XEXiRIFN0Adl8-0rSRTootbSmiq-QF7CA/edit?slide=id.p#slide=id.p" target="_blank" rel="noopener">Documentation</a></p>
         </div>
     </article>
 
     <article class="project">
         <div class="project-meta">
-            <span class="project-num">03</span>
-            <span>Fall 2026</span>
-            <span>Python, FastAPI, OpenCV, Raspberry Pi</span>
-        </div>
-        <div class="project-body">
-            <h3>FireWatch</h3>
-            <p>
-                My team's entry for the 2026 Congressional App Challenge. Raspberry Pi devices use a camera (through
-                OpenCV) and an MLX90640 thermal sensor to spot unusual heat, then report it to a FastAPI server. The
-                website maps those reports next to NASA FIRMS satellite fire data and plans driving, biking, or
-                walking routes around fire zones. Anyone can connect their own camera. A flagged event has to be
-                confirmed by the camera's owner, because automatic detection gets things wrong. We still need to test
-                it on real hardware outdoors.
-            </p>
-            <p class="links">
-                <a href="https://firewatch-deployment.onrender.com" target="_blank" rel="noopener">Live site</a>
-                <a href="https://github.com/magicKansh/firewatch_deployment" target="_blank" rel="noopener">Source code</a>
-            </p>
-        </div>
-    </article>
-
-    <article class="project">
-        <div class="project-meta">
-            <span class="project-num">04</span>
-            <span>2025 to 2026</span>
-            <span>Python, rasterio, NumPy, Matplotlib</span>
+            <p class="year">2026</p>
+            <p class="role">TSA Geospatial Technology, team of 3</p>
         </div>
         <div class="project-body">
             <h3>Urban heat in New York City</h3>
             <p>
-                For TSA's Geospatial Technology event, two teammates and I looked at why some New York City
-                neighborhoods run so much hotter than others, then proposed cooling solutions. I wrote the Python
-                that reads the city's surface-temperature raster and maps how far each area sits from the citywide
-                average. We combined that with data on air-conditioning access and heat vulnerability. One result
-                surprised us: AC access explained very little of the difference in heat between neighborhoods. We
-                placed 4th at the New Jersey state conference.
+                We looked at why some NYC neighborhoods run much hotter than others. I wrote the Python that
+                reads the surface-temperature raster and maps each area's difference from the city average.
+                Comparing it with air-conditioning data showed that AC access alone explains very little of
+                the heat, which changed the cooling ideas we proposed. 4th place in New Jersey.
             </p>
-            <figure class="media">
-                <img src="graph.png" alt="Two maps of New York City heat: current conditions and predicted conditions after the proposed cooling solution">
-                <figcaption>Heat across NYC now (left) and our prediction with the proposed cooling solution (right).</figcaption>
-            </figure>
+            <p class="stack">Python · rasterio · NumPy · Matplotlib</p>
+            <img src="graph.png" alt="Two maps of New York City comparing heat before and after the proposed cooling plan" class="figure">
             <details>
-                <summary>Python code for the heat map</summary>
+                <summary>Python code</summary>
 <pre><code>import rasterio
 import matplotlib.pyplot as plt
 import numpy as np
 
-heatmap_raster_path = "f_deviation_smooth.tif"
-with rasterio.open(heatmap_raster_path) as src:
-    heat_map = src.read(1)  # first band of the raster
-
-    # hide cells with no data
+with rasterio.open("f_deviation_smooth.tif") as src:
+    heat_map = src.read(1)
     if src.nodata is not None:
         heat_map = np.ma.masked_equal(heat_map, src.nodata)
     else:
         heat_map = np.ma.masked_less(heat_map, -100)
 
-    plt.figure(figsize=(9, 8))
-    plt.imshow(heat_map, cmap='turbo')
-    plt.title("NYC Urban Heat Map (Mean Surface Temperature 2020–2022)")
-    plt.colorbar(label="Deviation from the Mean")
-    plt.tight_layout()
-    plt.grid()
-    plt.show()</code></pre>
+plt.figure(figsize=(9, 8))
+plt.imshow(heat_map, cmap="turbo")
+plt.title("NYC Urban Heat Map (Mean Surface Temperature 2020-2022)")
+plt.colorbar(label="Deviation from the mean")
+plt.tight_layout()
+plt.show()</code></pre>
             </details>
-            <p class="links"><a href="https://canva.link/zms0t4kmhmxukpt" target="_blank" rel="noopener">Full TSA portfolio</a></p>
+            <p class="links"><a href="https://canva.link/zms0t4kmhmxukpt" target="_blank" rel="noopener">Full portfolio</a></p>
         </div>
     </article>
 
     <article class="project">
         <div class="project-meta">
-            <span class="project-num">05</span>
-            <span>2026, three months</span>
-            <span>Onshape, 3D printing, testing</span>
+            <p class="year">2026</p>
+            <p class="role">Hack Club hackathon, team</p>
+        </div>
+        <div class="project-body">
+            <h3>LunchLoop</h3>
+            <p>
+                I showed up to the hackathon alone and left with a team and this: a tool that tells a cafeteria
+                how many servings of each item to cook, based on past meals, attendance, and a buffer so nobody
+                gets left without lunch. Students can vote on upcoming menus. On simulated data it found
+                about $1,000 in savings and roughly 47% less waste.
+            </p>
+            <p class="stack">Python · pandas · FastAPI · React</p>
+            <p class="links">
+                <a href="https://larpathon-capitol.github.io/lunchloop/" target="_blank" rel="noopener">Live site</a>
+                <a href="https://github.com/Larpathon-Capitol/lunchloop" target="_blank" rel="noopener">Source</a>
+            </p>
+        </div>
+    </article>
+
+    <article class="project">
+        <div class="project-meta">
+            <p class="year">3 months</p>
+            <p class="role">CAD lead, with the biotech academy</p>
         </div>
         <div class="project-body">
             <h3>Gamlect, a coral gamete collector</h3>
             <p>
-                A joint project with students from our school's Academy of Biotechnology. Coral release gametes
-                (eggs and sperm) only a few nights a year, and we designed a collector to catch them. I was in charge
-                of the CAD. Sizing errors and printing limits meant a lot of rounds of changes, but we ended with a
-                3D-printed collector that gathered agar replicas of gametes, with a side box for a camera and a
-                collection chamber at the top.
+                Corals spawn on only a few nights a year, so collecting gametes has to work the first time. Our
+                team designed a 3D-printed collector with a camera box on the side to watch the flow and a
+                collection chamber on top. I did the CAD, which mostly meant redoing measurements after every
+                test print came out the wrong size.
             </p>
-            <figure class="media">
-                <video controls preload="metadata">
-                    <source src="cad.mp4" type="video/mp4">
-                </video>
-                <figcaption>The collector model in Onshape.</figcaption>
-            </figure>
+            <p class="stack">Onshape · 3D printing · Testing</p>
+            <video class="figure" controls preload="metadata">
+                <source src="cad.mp4" type="video/mp4">
+            </video>
             <p class="links">
                 <a href="https://cad.onshape.com/documents/6f3efc8606537e76b9a036a9/w/da372350352faa7c1f316d4a/e/9dedb0928d59d53344df6763?renderMode=0&amp;uiState=6a104cbb2014af084195cbf1" target="_blank" rel="noopener">Onshape model</a>
                 <a href="https://docs.google.com/presentation/d/1x4TAer9qMEF2nMa_VMQ8C2oHFYKpV9djLpQZnI1w16g/edit?usp=sharing" target="_blank" rel="noopener">Documentation</a>
             </p>
         </div>
     </article>
+</section>
 
-    <article class="project">
-        <div class="project-meta">
-            <span class="project-num">06</span>
-            <span>Fall 2026</span>
-            <span>Python, pandas, FastAPI, React</span>
+<!-- ================= RECORD ================= -->
+<section id="record">
+    <h2>Record</h2>
+
+    <div class="record-grid">
+        <div>
+            <h3>Awards</h3>
+            <table>
+                <tbody>
+                    <tr><td>2026</td><td>Rising All-Star Award, FIRST Robotics (Mid-Atlantic)</td></tr>
+                    <tr><td>2026</td><td>4th place, Geospatial Technology, TSA NJ State Conference</td></tr>
+                    <tr><td>2025</td><td>4th place, Technology Bowl, TSA NJ State Conference</td></tr>
+                    <tr><td>2026</td><td>Hack Club Fallout (60 hrs) and Capitol (36 hrs) certifications</td></tr>
+                    <tr><td>2026</td><td>FireWatch submitted to the Congressional App Challenge</td></tr>
+                </tbody>
+            </table>
         </div>
-        <div class="project-body">
-            <h3>LunchLoop</h3>
-            <p>
-                Built over a Hack Club hackathon with people I met there. LunchLoop predicts how many servings of each
-                cafeteria item to cook, based on past meals and attendance, and adds a buffer so nobody runs out.
-                Students can vote on upcoming menus. On a simulated school of 2,750 students, it found over $1,000 in
-                savings and cut leftovers by about 47%.
-            </p>
-            <p class="links">
-                <a href="https://larpathon-capitol.github.io/lunchloop/" target="_blank" rel="noopener">Live site</a>
-                <a href="https://github.com/Larpathon-Capitol/lunchloop" target="_blank" rel="noopener">Source code</a>
-            </p>
+
+        <div>
+            <h3>Test scores</h3>
+            <table>
+                <tbody>
+                    <tr><td>SAT</td><td>1560 <span class="sub">(Reading &amp; Writing 770, Math 790)</span></td></tr>
+                    <tr><td>PSAT/NMSQT</td><td>1470 <span class="sub">(Reading &amp; Writing 710, Math 760)</span></td></tr>
+                    <tr><td>AP</td><td>Computer Science Principles: 5 <span class="sub">(self-studied)</span></td></tr>
+                </tbody>
+            </table>
+            <h3>Coursework beyond school</h3>
+            <table>
+                <tbody>
+                    <tr><td>FDU</td><td>Computer Programming I and II (dual enrollment)</td></tr>
+                    <tr><td>Now</td><td>AP Computer Science A</td></tr>
+                </tbody>
+            </table>
         </div>
-    </article>
+
+        <div class="wide">
+            <h3>Activities</h3>
+            <table>
+                <tbody>
+                    <tr><td>2024 to now</td><td>Robotics, FRC and FTC. Mechanical lead 2025–26, president 2026–27.</td></tr>
+                    <tr><td>2024 to now</td><td>TSA. This year: Data Analytics, Automated Manufacturing Prototype, Manufacturing Prototype.</td></tr>
+                    <tr><td>2026 to now</td><td>Student Advocacy Panel</td></tr>
+                    <tr><td>2025–26</td><td>Student Council secretary. Helped raise over $1,000 through homecoming and pep rallies.</td></tr>
+                    <tr><td>Summer 2025</td><td>Camp counselor at the MCST STEM camp and Essex County 4-H, teaching robotics, Arduino, and Onshape.</td></tr>
+                    <tr><td>Fall 2024</td><td>Mind4Youth volunteer, made affirmation cards for a teen mental health group (23 hrs).</td></tr>
+                    <tr><td>2026–27</td><td>Yearbook</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </section>
 
-<!-- ============ AWARDS ============ -->
-<section id="awards">
-    <h2>Awards</h2>
-    <table class="list">
-        <tbody>
-            <tr><td>2026</td><td>Rising All-Star Award, FIRST Robotics Competition, Mid-Atlantic district</td></tr>
-            <tr><td>2026</td><td>4th place, Geospatial Technology, TSA New Jersey State Conference</td></tr>
-            <tr><td>2026</td><td>Score of 5, AP Computer Science Principles (self-studied)</td></tr>
-            <tr><td>2026</td><td>Hack Club Fallout certification (60 hours) and Capitol certification (36 hours)</td></tr>
-            <tr><td>2026</td><td>Congressional App Challenge entry: FireWatch</td></tr>
-            <tr><td>2025</td><td>4th place, Technology Bowl, TSA New Jersey State Conference</td></tr>
-        </tbody>
-    </table>
-    <p class="note">
-        Coursework beyond my academy: Computer Programming I and II through Fairleigh Dickinson University (dual
-        enrollment), and AP Computer Science A this year.
-    </p>
-</section>
-
-<!-- ============ ACTIVITIES ============ -->
-<section id="activities">
-    <h2>Activities</h2>
-    <table class="list">
-        <tbody>
-            <tr><td>2024–now</td><td><strong>Robotics team (FRC and FTC).</strong> President since fall 2026, mechanical leader in 2025–26. I teach new members CAD, wiring, and the engineering design process.</td></tr>
-            <tr><td>2024–now</td><td><strong>Technology Student Association.</strong> This year I'm competing in Data Analytics, Automated Manufacturing Prototype, and Manufacturing Prototype.</td></tr>
-            <tr><td>2026–now</td><td><strong>Student Advocacy Panel.</strong> I collect feedback from classmates and bring it to the administration.</td></tr>
-            <tr><td>2026–now</td><td><strong>Yearbook staff.</strong></td></tr>
-            <tr><td>2025–26</td><td><strong>Student Council secretary.</strong> Helped raise over $1,000 through homecoming and pep rallies.</td></tr>
-            <tr><td>Summer 2025</td><td><strong>STEM camp counselor.</strong> Ran the robotics station at the MCST STEM Summer Camp and taught Onshape and Arduino at an Essex County 4-H camp.</td></tr>
-            <tr><td>Fall 2024</td><td><strong>Mind4Youth.</strong> Designed and printed positive-affirmation cards for a teen mental health organization (23 hours).</td></tr>
-        </tbody>
-    </table>
-</section>
-
-<!-- ============ CONTACT ============ -->
 <section id="contact">
     <h2>Contact</h2>
-    <p>
-        The best way to reach me is email: <a href="mailto:ekansh.simgekar@mcvts.org">ekansh.simgekar@mcvts.org</a>.
-        My code is on <a href="https://github.com/magicKansh" target="_blank" rel="noopener">GitHub</a>, and my resume
-        is <a href="https://canva.link/9kr9olnwmzx9a7y" target="_blank" rel="noopener">here</a>.
+    <p class="contact-line">
+        <a href="mailto:ekansh.simgekar@mcvts.org">ekansh.simgekar@mcvts.org</a>
+        <a href="https://github.com/magicKansh" target="_blank" rel="noopener">github.com/magicKansh</a>
+        <a href="https://canva.link/9kr9olnwmzx9a7y" target="_blank" rel="noopener">Resume (PDF)</a>
     </p>
 </section>
 
 </main>
 
 <footer>
-    <p>Ekansh Simgekar, 2026. The gear drawing is made with three.js.</p>
+    <p>Ekansh Simgekar, 2026</p>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>

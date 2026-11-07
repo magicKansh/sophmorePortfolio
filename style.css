@@ -1,181 +1,209 @@
+/* Engineering-notebook look: paper, ink, one orange for marks. */
 :root {
-    --paper: #ffffff;
-    --ink: #141414;
-    --soft: #5c5c5c;
-    --rule: #dedede;
-    --red: #c4161c; /* team red */
-    --code-bg: #f4f4f2;
+    --paper: #f3f0e8;
+    --ink: #151515;
+    --soft: #5c5a55;
+    --rule: #cfcabd;
+    --mark: #d9480f;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 
-html { scroll-padding-top: 72px; }
+html { scroll-padding-top: 70px; }
 
 body {
     margin: 0;
-    background: var(--paper);
-    color: var(--ink);
-    font-family: 'IBM Plex Sans', Helvetica, Arial, sans-serif;
+    font-family: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
     font-size: 17px;
     line-height: 1.6;
+    color: var(--ink);
+    background: var(--paper);
 }
 
-img, video { max-width: 100%; display: block; }
+a { color: var(--ink); text-decoration-color: var(--mark); text-underline-offset: 3px; text-decoration-thickness: 2px; }
+a:hover { color: var(--mark); }
 
-a { color: var(--ink); text-decoration-color: var(--red); text-underline-offset: 3px; text-decoration-thickness: 1.5px; }
-a:hover { color: var(--red); }
+:focus-visible { outline: 2px solid var(--mark); outline-offset: 2px; }
 
-:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
-
-.skip { position: absolute; left: -999px; top: 8px; background: var(--ink); color: #fff; padding: 6px 10px; }
+.skip { position: absolute; left: -999px; top: 8px; background: var(--ink); color: var(--paper); padding: 6px 10px; }
 .skip:focus { left: 8px; }
 
-/* ---------- nav ---------- */
-.nav {
+img, video { max-width: 100%; }
+
+/* ---------- Masthead ---------- */
+.masthead {
     position: sticky;
     top: 0;
     z-index: 10;
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    gap: 16px;
-    max-width: 1080px;
-    margin: 0 auto;
-    padding: 18px 24px 14px;
+    padding: 14px 32px;
     background: var(--paper);
     border-bottom: 1px solid var(--ink);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
 }
-.nav-name { font-weight: 700; text-decoration: none; }
-.nav-links { display: flex; gap: 22px; }
-.nav-links a { text-decoration: none; font-size: 0.95rem; }
-.nav-links a:hover { text-decoration: underline; color: var(--ink); }
+.name-small { text-decoration: none; font-weight: 500; }
+.masthead nav a { margin-left: 22px; text-decoration: none; }
+.masthead nav a:hover { text-decoration: underline; text-decoration-color: var(--mark); }
 
-/* ---------- layout ---------- */
-main { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+main { max-width: 1060px; margin: 0 auto; padding: 0 32px; }
 
-section { padding: 56px 0 24px; border-top: 1px solid var(--rule); }
+section { padding: 72px 0 24px; }
 
-h1, h2, h3 { line-height: 1.15; margin: 0; }
+h1, h2, h3 { font-weight: 800; letter-spacing: -0.02em; margin: 0; }
+
 h2 {
     font-size: 0.85rem;
-    font-weight: 500;
     font-family: 'IBM Plex Mono', monospace;
+    font-weight: 500;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--red);
-    margin-bottom: 28px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--ink);
+    margin-bottom: 8px;
 }
-h3 { font-size: 1.45rem; font-weight: 700; margin-bottom: 12px; }
 
-/* ---------- intro ---------- */
+/* ---------- Intro ---------- */
 .intro {
     display: grid;
     grid-template-columns: 1.1fr 1fr;
     gap: 48px;
-    align-items: center;
-    padding: 64px 0 56px;
+    align-items: end;
+    padding-top: 64px;
 }
-.intro h1 { font-size: clamp(2.6rem, 6vw, 4.2rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 24px; }
-.lede { font-size: 1.2rem; }
-.intro p { max-width: 58ch; }
-.intro-links { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 28px; }
 
-.viewer { margin: 0; }
-.viewer canvas {
-    display: block;
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    cursor: grab;
-    touch-action: none;
-    background-color: #fafafa;
-    background-image:
-        linear-gradient(#ececec 1px, transparent 1px),
-        linear-gradient(90deg, #ececec 1px, transparent 1px);
-    background-size: 24px 24px;
+h1 {
+    font-size: clamp(3rem, 8vw, 5.6rem);
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    margin-bottom: 24px;
+}
+
+.lede { font-size: 1.2rem; max-width: 30em; margin: 0 0 28px; }
+
+.facts { margin: 0; border-top: 1px solid var(--rule); }
+.facts div {
+    display: grid;
+    grid-template-columns: 9em 1fr;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--rule);
+}
+.facts dt { font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; color: var(--soft); padding-top: 3px; }
+.facts dd { margin: 0; }
+
+.drawing {
+    margin: 0;
     border: 1px solid var(--ink);
+    background:
+        linear-gradient(var(--rule) 1px, transparent 1px) 0 0 / 24px 24px,
+        linear-gradient(90deg, var(--rule) 1px, transparent 1px) 0 0 / 24px 24px,
+        #f7f5ef;
 }
-.viewer canvas:active { cursor: grabbing; }
-.viewer figcaption, .media figcaption { font-size: 0.85rem; color: var(--soft); margin-top: 8px; }
-.no-3d .viewer { display: none; }
-.no-3d .intro { grid-template-columns: 1fr; }
+#gears { display: block; width: 100%; aspect-ratio: 1 / 1; }
+.titleblock {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    border-top: 1px solid var(--ink);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+}
+.titleblock span { padding: 6px 10px; }
+.titleblock span + span { border-left: 1px solid var(--ink); }
+.titleblock span:first-child { color: var(--mark); font-weight: 500; }
 
-/* ---------- projects ---------- */
+/* ---------- Projects ---------- */
 .project {
     display: grid;
-    grid-template-columns: 220px 1fr;
+    grid-template-columns: 200px 1fr;
     gap: 32px;
-    padding: 32px 0;
-    border-top: 1px solid var(--rule);
+    padding: 36px 0;
+    border-bottom: 1px solid var(--rule);
 }
-.project:first-of-type { border-top: 0; padding-top: 0; }
+.project:last-child { border-bottom: 0; }
 
-.project-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.8rem;
-    color: var(--soft);
+.project-meta { font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; color: var(--soft); }
+.project-meta p { margin: 0 0 4px; }
+.project-meta .year { color: var(--mark); font-weight: 500; }
+
+.project-body h3 { font-size: 1.6rem; margin-bottom: 10px; }
+.project-body > p { max-width: 38em; margin: 0 0 12px; }
+
+.stack { font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; color: var(--soft); }
+
+.figure {
+    display: block;
+    width: 100%;
+    max-width: 640px;
+    height: auto;
+    margin: 18px 0;
+    border: 1px solid var(--ink);
+    background: #000;
 }
-.project-num { font-size: 1.6rem; color: var(--ink); margin-bottom: 6px; }
+.figure.tall { max-width: 300px; }
 
-.project-body { max-width: 68ch; }
-.project-body > p { margin: 0 0 14px; }
+.links { display: flex; gap: 20px; font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; }
 
-.media { margin: 24px 0; }
-.media img, .media video { width: 100%; border: 1px solid var(--rule); background: #000; }
-.media img { background: none; }
-.media-narrow { max-width: 320px; }
-
-.links { display: flex; flex-wrap: wrap; gap: 20px; font-size: 0.95rem; }
-
-details { margin: 16px 0; }
-summary { cursor: pointer; font-size: 0.95rem; text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 3px; }
-summary:hover { text-decoration-color: var(--red); }
-
+details { margin: 12px 0; max-width: 640px; }
+summary { cursor: pointer; font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; }
 pre {
-    margin: 12px 0 0;
-    padding: 16px;
-    background: var(--code-bg);
-    border-left: 3px solid var(--red);
+    margin: 10px 0 0;
+    padding: 14px 16px;
     overflow-x: auto;
+    background: #1d1d1b;
+    color: #ece8dc;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.8rem;
-    line-height: 1.55;
+    line-height: 1.5;
 }
 
-/* ---------- awards + activities ---------- */
-.list { width: 100%; border-collapse: collapse; }
-.list td { padding: 12px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
-.list td:first-child {
-    width: 140px;
-    padding-right: 20px;
+/* ---------- Record ---------- */
+.record-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 48px;
+}
+.record-grid .wide { grid-column: 1 / -1; }
+.record-grid h3 { font-size: 1.1rem; margin: 24px 0 8px; }
+
+table { width: 100%; border-collapse: collapse; }
+td {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+}
+td:first-child {
+    width: 8.5em;
+    padding-right: 16px;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: var(--soft);
-    white-space: nowrap;
+    padding-top: 11px;
 }
-.note { color: var(--soft); font-size: 0.95rem; max-width: 70ch; }
+.sub { color: var(--soft); font-size: 0.9rem; }
 
-#contact p { max-width: 60ch; font-size: 1.1rem; }
+/* ---------- Contact ---------- */
+.contact-line { display: flex; flex-wrap: wrap; gap: 12px 32px; font-size: 1.25rem; margin: 20px 0 0; }
 
 footer {
-    max-width: 1080px;
-    margin: 48px auto 0;
-    padding: 20px 24px 40px;
+    max-width: 1060px;
+    margin: 72px auto 0;
+    padding: 20px 32px 40px;
     border-top: 1px solid var(--ink);
-    font-size: 0.85rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
     color: var(--soft);
 }
 
-/* ---------- small screens ---------- */
+/* ---------- Small screens ---------- */
 @media (max-width: 760px) {
     body { font-size: 16px; }
-    .intro { grid-template-columns: 1fr; gap: 32px; padding-top: 40px; }
-    .project { grid-template-columns: 1fr; gap: 12px; }
-    .project-meta { flex-direction: row; flex-wrap: wrap; gap: 4px 14px; align-items: baseline; }
-    .project-num { font-size: 1rem; margin: 0; }
-    .nav { flex-direction: column; gap: 6px; }
-    .nav-links { gap: 16px; }
-    .list td:first-child { width: 96px; white-space: normal; }
+    .masthead { padding: 12px 16px; }
+    .masthead nav a { margin-left: 14px; }
+    main { padding: 0 16px; }
+    .intro, .record-grid { grid-template-columns: 1fr; }
+    .intro { padding-top: 40px; gap: 32px; }
+    .project { grid-template-columns: 1fr; gap: 8px; }
+    footer { padding: 20px 16px 32px; }
 }
