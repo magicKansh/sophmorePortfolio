@@ -15,7 +15,7 @@
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
-    camera.position.set(0, 0, 15);
+    camera.position.set(0, 0, 24);
 
     // Spur gear outline with simple trapezoid teeth, extruded and drawn as edges.
     // module m sets tooth size; pitch radius = teeth * m / 2.
