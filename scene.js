@@ -1,137 +1,120 @@
-// 3D background: spinning gears, wireframe shapes, and a particle field.
-// If WebGL or three.js is unavailable, the CSS gradient background shows instead.
+// Line drawing of two meshing spur gears, like a CAD viewport.
+// Drag to rotate the view. Hidden if three.js or WebGL is unavailable.
 (function () {
-    const canvas = document.getElementById('bg');
-    if (!canvas || typeof THREE === 'undefined') return;
+    const canvas = document.getElementById('gears');
+    const fail = () => document.documentElement.classList.add('no-3d');
+    if (!canvas || typeof THREE === 'undefined') return fail();
 
     let renderer;
     try {
         renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
     } catch (e) {
-        return;
+        return fail();
     }
-    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x07070d, 0.035);
+    const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
+    camera.position.set(0, 0, 15);
 
-    const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 100);
-    camera.position.set(0, 0, 14);
-
-    // Lights
-    scene.add(new THREE.AmbientLight(0xffffff, 0.35));
-    const cyanLight = new THREE.PointLight(0x22d3ee, 2.2, 40);
-    cyanLight.position.set(-8, 6, 8);
-    scene.add(cyanLight);
-    const violetLight = new THREE.PointLight(0xa855f7, 2.2, 40);
-    violetLight.position.set(8, -4, 6);
-    scene.add(violetLight);
-
-    // Gear geometry: a toothed outline with a center hole, extruded with a bevel
-    function gearGeometry(teeth, outer, inner, depth) {
-        const shape = new THREE.Shape();
+    // Spur gear outline with simple trapezoid teeth, extruded and drawn as edges.
+    // module m sets tooth size; pitch radius = teeth * m / 2.
+    const m = 0.36;
+    function gear(teeth, color) {
+        const r = (teeth * m) / 2;
+        const outer = r + m;
+        const root = r - 1.25 * m;
         const step = (Math.PI * 2) / teeth;
+        const shape = new THREE.Shape();
         for (let i = 0; i < teeth; i++) {
             const a = i * step;
             const pts = [
-                [inner, a],
-                [outer, a + step * 0.15],
-                [outer, a + step * 0.45],
-                [inner, a + step * 0.6]
+                [root, a - step * 0.25],
+                [outer, a - step * 0.12],
+                [outer, a + step * 0.12],
+                [root, a + step * 0.25]
             ];
-            pts.forEach(([r, t], j) => {
-                const x = Math.cos(t) * r;
-                const y = Math.sin(t) * r;
-                if (i === 0 && j === 0) shape.moveTo(x, y);
-                else shape.lineTo(x, y);
+            pts.forEach(([rad, t], j) => {
+                const x = Math.cos(t) * rad, y = Math.sin(t) * rad;
+                if (i === 0 && j === 0) shape.moveTo(x, y); else shape.lineTo(x, y);
             });
         }
         shape.closePath();
-        const hole = new THREE.Path();
-        hole.absarc(0, 0, inner * 0.35, 0, Math.PI * 2, true);
-        shape.holes.push(hole);
-        const geo = new THREE.ExtrudeGeometry(shape, {
-            depth, bevelEnabled: true, bevelThickness: 0.08, bevelSize: 0.06, bevelSegments: 2, curveSegments: 24
-        });
-        geo.center();
-        return geo;
+        const bore = new THREE.Path();
+        bore.absarc(0, 0, m * 1.4, 0, Math.PI * 2, true);
+        shape.holes.push(bore);
+
+        const geo = new THREE.ExtrudeGeometry(shape, { depth: 0.6, bevelEnabled: false, curveSegments: 32 });
+        geo.translate(0, 0, -0.3);
+        const group = new THREE.Group();
+        group.add(new THREE.LineSegments(new THREE.EdgesGeometry(geo, 20), new THREE.LineBasicMaterial({ color })));
+
+        // shaft
+        const shaft = new THREE.CylinderGeometry(m * 1.4, m * 1.4, 3, 24, 1, true);
+        shaft.rotateX(Math.PI / 2);
+        group.add(new THREE.LineSegments(new THREE.EdgesGeometry(shaft, 30), new THREE.LineBasicMaterial({ color: 0x8a8a8a })));
+        return { group, r };
     }
 
-    const metal = color => new THREE.MeshStandardMaterial({ color, metalness: 0.85, roughness: 0.28 });
+    const big = gear(14, 0x141414);
+    const small = gear(10, 0xc4161c);
+    const rig = new THREE.Group();
+    rig.add(big.group, small.group);
+    const center = big.r + small.r;
+    big.group.position.x = -center * 0.42;
+    small.group.position.x = center * 0.58;
+    scene.add(rig);
 
-    const objects = [];
-    function add(mesh, x, y, z, spin) {
-        mesh.position.set(x, y, z);
-        mesh.userData = { spin, baseY: y, phase: Math.random() * Math.PI * 2 };
-        scene.add(mesh);
-        objects.push(mesh);
-        return mesh;
-    }
-
-    // Two meshing gears on the right, one on the left
-    const gearA = add(new THREE.Mesh(gearGeometry(14, 2.2, 1.85, 0.5), metal(0x334155)), 6.2, 2.4, -2, 0.25);
-    const gearB = add(new THREE.Mesh(gearGeometry(10, 1.55, 1.25, 0.5), metal(0x4c1d95)), 8.9, 0.1, -2, -0.35);
-    add(new THREE.Mesh(gearGeometry(18, 2.8, 2.45, 0.4), metal(0x164e63)), -7.5, -3.2, -5, 0.15);
-    gearA.rotation.x = gearB.rotation.x = 0.35;
-
-    // Wireframe shapes
-    const wire = color => new THREE.MeshBasicMaterial({ color, wireframe: true, transparent: true, opacity: 0.35 });
-    add(new THREE.Mesh(new THREE.TorusKnotGeometry(1.6, 0.42, 140, 14), wire(0x22d3ee)), -6.5, 3.4, -4, 0.2);
-    add(new THREE.Mesh(new THREE.IcosahedronGeometry(1.1, 1), wire(0xa855f7)), 3.5, -4.2, -1, 0.3);
-    add(new THREE.Mesh(new THREE.OctahedronGeometry(0.7, 0), wire(0x22d3ee)), -2.8, -5.5, 1, 0.45);
-    add(new THREE.Mesh(new THREE.TorusGeometry(1.3, 0.06, 12, 80), wire(0xf0abfc)), 0.5, 5.2, -6, 0.25);
-
-    // Particle field
-    const count = 700;
-    const positions = new Float32Array(count * 3);
-    for (let i = 0; i < count; i++) {
-        positions[i * 3] = (Math.random() - 0.5) * 50;
-        positions[i * 3 + 1] = (Math.random() - 0.5) * 40;
-        positions[i * 3 + 2] = (Math.random() - 0.5) * 30 - 5;
-    }
-    const pGeo = new THREE.BufferGeometry();
-    pGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    const particles = new THREE.Points(pGeo, new THREE.PointsMaterial({
-        color: 0x93c5fd, size: 0.05, transparent: true, opacity: 0.7
-    }));
-    scene.add(particles);
-
-    // Mouse parallax + scroll
-    const mouse = { x: 0, y: 0 };
-    window.addEventListener('pointermove', e => {
-        mouse.x = e.clientX / window.innerWidth - 0.5;
-        mouse.y = e.clientY / window.innerHeight - 0.5;
+    // starting view: tilted, like an isometric CAD view
+    const view = { x: -0.55, y: 0.6 };
+    let dragging = false, lastX = 0, lastY = 0;
+    canvas.addEventListener('pointerdown', e => { dragging = true; lastX = e.clientX; lastY = e.clientY; canvas.setPointerCapture(e.pointerId); });
+    canvas.addEventListener('pointermove', e => {
+        if (!dragging) return;
+        view.y += (e.clientX - lastX) * 0.01;
+        view.x += (e.clientY - lastY) * 0.01;
+        view.x = Math.max(-1.5, Math.min(1.5, view.x));
+        lastX = e.clientX; lastY = e.clientY;
+        if (still) draw(); // keep dragging responsive even with reduced motion
     });
+    const stop = () => { dragging = false; };
+    canvas.addEventListener('pointerup', stop);
+    canvas.addEventListener('pointercancel', stop);
 
-    window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
+    function resize() {
+        const w = canvas.clientWidth, h = canvas.clientHeight;
+        if (!w || !h) return;
+        renderer.setSize(w, h, false);
+        camera.aspect = w / h;
         camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-
-    const clock = new THREE.Clock();
-    function frame() {
-        const t = clock.getElapsedTime();
-        const scroll = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
-
-        objects.forEach(o => {
-            o.rotation.z += o.userData.spin * 0.01;
-            o.rotation.y += o.userData.spin * 0.004;
-            o.position.y = o.userData.baseY + Math.sin(t * 0.6 + o.userData.phase) * 0.25;
-        });
-        // keep the two meshing gears turning in sync (14 vs 10 teeth)
-        gearB.rotation.z = -gearA.rotation.z * (14 / 10) + 0.2;
-
-        particles.rotation.y = t * 0.02;
-        camera.position.x += (mouse.x * 2 - camera.position.x) * 0.04;
-        camera.position.y += (-mouse.y * 1.5 - scroll * 6 - camera.position.y) * 0.04;
-        camera.lookAt(0, -scroll * 6, 0);
-
-        renderer.render(scene, camera);
-        if (!reduceMotion) requestAnimationFrame(frame);
     }
-    frame();
+
+    const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let angle = 0, visible = true;
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(canvas);
+
+    function draw() {
+        resize();
+        big.group.rotation.z = angle;
+        // meshing: opposite direction at the tooth ratio, offset half a tooth so teeth interlock
+        small.group.rotation.z = -angle * (14 / 10) + Math.PI / 10;
+        rig.rotation.x = view.x;
+        rig.rotation.y = view.y;
+        renderer.render(scene, camera);
+    }
+
+    function frame() {
+        if (visible) {
+            angle += 0.006;
+            draw();
+        }
+        requestAnimationFrame(frame);
+    }
+
+    if (still) {
+        draw();
+        window.addEventListener('resize', draw);
+    } else {
+        frame();
+    }
 })();
