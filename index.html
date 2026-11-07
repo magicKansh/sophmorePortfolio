@@ -7,7 +7,7 @@
     <meta name="description" content="Portfolio of Ekansh Simgekar: robotics, prosthetic hands, wildfire monitoring, data analysis, and more.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -15,14 +15,19 @@
 
 <a class="skip" href="#main">Skip to content</a>
 
+<!-- 3D background (drawn by scene.js) -->
+<canvas id="bg" aria-hidden="true"></canvas>
+<div class="bg-glow" aria-hidden="true"></div>
+
 <nav class="topbar" aria-label="Main">
-    <a class="logo" href="#top">ES<span>.</span></a>
+    <a class="logo" href="#top">ES</a>
     <div class="links">
         <a href="#about">About</a>
         <a href="#wins">Wins</a>
         <a href="#projects">Projects</a>
+        <a href="#leadership">Leadership</a>
         <a href="#timeline">Timeline</a>
-        <a href="#contact">Contact</a>
+        <a href="#contact" class="links-cta">Contact</a>
     </div>
 </nav>
 
@@ -31,40 +36,43 @@
 <!-- ============ HERO ============ -->
 <header class="hero" id="top">
     <div class="hero-text">
-        <p class="kicker">Hi, I'm</p>
-        <h1>Ekansh<br><span class="outline">Simgekar</span></h1>
+        <p class="eyebrow"><span class="dot"></span> Mechatronics · Robotics · Code</p>
+        <h1>Ekansh<br><span class="grad">Simgekar</span></h1>
         <p class="tagline">I build things that move: robots, prosthetic hands, and the code that brings them to life.</p>
-        <div class="hero-tags">
-            <span class="tag tag-orange">Robotics President</span>
-            <span class="tag tag-teal">Future Mechatronics Engineer</span>
-            <span class="tag tag-yellow">Class of 2028</span>
+        <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">See my projects</a>
+            <a class="btn btn-ghost" href="#contact">Get in touch</a>
         </div>
+        <ul class="hero-meta">
+            <li><strong>President</strong><span>MCST Robotics</span></li>
+            <li><strong>2× 4th</strong><span>TSA NJ States</span></li>
+            <li><strong>Class of</strong><span>2028</span></li>
+        </ul>
     </div>
-    <div class="hero-photo">
-        <div class="photo-frame">
-            <img src="photos.jpg" alt="Ekansh Simgekar">
+    <figure class="hero-photo">
+        <div class="photo-card">
+            <img src="award.jpg" alt="Ekansh holding the 2026 Rising All-Star Award">
         </div>
-        <div class="sticker sticker-1" aria-hidden="true">⚙️ builds stuff</div>
-        <div class="sticker sticker-2" aria-hidden="true">🤖 FRC + FTC</div>
-    </div>
+        <figcaption class="photo-badge">
+            <span class="badge-icon" aria-hidden="true">🏆</span>
+            <span><strong>Rising All-Star Award</strong><br>FIRST Mid-Atlantic, 2026</span>
+        </figcaption>
+    </figure>
 </header>
 
-<div class="marquee" aria-hidden="true">
-    <div class="marquee-track">
-        <span>C++</span><span>★</span><span>Python</span><span>★</span><span>Java</span><span>★</span><span>Arduino</span><span>★</span>
-        <span>Onshape CAD</span><span>★</span><span>FastAPI</span><span>★</span><span>Raspberry Pi</span><span>★</span><span>pandas</span><span>★</span>
-        <span>React</span><span>★</span><span>HTML/CSS</span><span>★</span><span>3D Printing</span><span>★</span><span>Wiring</span><span>★</span>
-        <span>C++</span><span>★</span><span>Python</span><span>★</span><span>Java</span><span>★</span><span>Arduino</span><span>★</span>
-        <span>Onshape CAD</span><span>★</span><span>FastAPI</span><span>★</span><span>Raspberry Pi</span><span>★</span><span>pandas</span><span>★</span>
-        <span>React</span><span>★</span><span>HTML/CSS</span><span>★</span><span>3D Printing</span><span>★</span><span>Wiring</span><span>★</span>
+<div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+        <span>C++</span><span>Python</span><span>Java</span><span>Arduino</span><span>Onshape</span><span>FastAPI</span><span>Raspberry Pi</span><span>pandas</span><span>React</span><span>OpenCV</span><span>3D Printing</span><span>Swerve Drive</span>
+        <span>C++</span><span>Python</span><span>Java</span><span>Arduino</span><span>Onshape</span><span>FastAPI</span><span>Raspberry Pi</span><span>pandas</span><span>React</span><span>OpenCV</span><span>3D Printing</span><span>Swerve Drive</span>
     </div>
 </div>
 
 <!-- ============ ABOUT ============ -->
 <section id="about" class="reveal">
-    <h2><span class="num">01</span> About Me</h2>
+    <p class="section-label">01 / About</p>
+    <h2>I like it when code makes something <span class="grad">move.</span></h2>
     <div class="about-grid">
-        <div class="card about-card">
+        <div class="glass about-card">
             <p>
                 I'm a junior in the Academy of Computer and Information Sciences at Morris County School of Technology.
                 I've learned Python, C++, Java, HTML, and CSS, but what I love most is when code makes something
@@ -72,60 +80,61 @@
                 <strong>mechatronics engineering</strong>.
             </p>
             <p>
-                As the first in my family to go to college in the U.S., I learned a lot from mentors: upperclassmen
-                on my robotics team and my welding teacher. Now I try to do the same for others, whether that's teaching
-                new robotics members or helping kids at summer camp get their first Arduino project working.
+                I learned a lot from mentors: upperclassmen on my robotics team and my welding teacher. Now I try to do
+                the same for others, whether that's teaching new robotics members or helping kids at summer camp get
+                their first Arduino project working.
             </p>
         </div>
         <div class="stats">
-            <div class="stat stat-orange"><span class="stat-num" data-count="2">2</span><span class="stat-label">TSA state<br>4th places</span></div>
-            <div class="stat stat-teal"><span class="stat-num" data-count="2">2</span><span class="stat-label">prosthetic<br>hands built</span></div>
-            <div class="stat stat-yellow"><span class="stat-num" data-count="96">96</span><span class="stat-label">Hack Club<br>build hours</span></div>
-            <div class="stat stat-pink"><span class="stat-num">5</span><span class="stat-label">on AP CSP<br>(self-studied)</span></div>
+            <div class="glass stat"><span class="stat-num">2</span><span class="stat-label">TSA state 4th places</span></div>
+            <div class="glass stat"><span class="stat-num">2</span><span class="stat-label">prosthetic hands built</span></div>
+            <div class="glass stat"><span class="stat-num">96</span><span class="stat-label">Hack Club build hours</span></div>
+            <div class="glass stat"><span class="stat-num">5</span><span class="stat-label">on AP CSP, self-studied</span></div>
         </div>
     </div>
 </section>
 
 <!-- ============ WINS ============ -->
 <section id="wins" class="reveal">
-    <h2><span class="num">02</span> Awards &amp; Wins</h2>
-    <div class="wins-grid">
-        <article class="win win-orange">
+    <p class="section-label">02 / Awards</p>
+    <h2>Awards &amp; <span class="grad">wins</span></h2>
+    <div class="bento">
+        <article class="glass win win-feature">
             <span class="win-icon" aria-hidden="true">🏆</span>
             <h3>Rising All-Star Award</h3>
-            <p>FIRST Robotics. Also placed 8th at our first FIRST Mid-Atlantic event (2026).</p>
+            <p>FIRST Robotics, 2026. Our team also placed 8th at our first FIRST Mid-Atlantic event.</p>
         </article>
-        <article class="win win-teal">
+        <article class="glass win">
             <span class="win-icon" aria-hidden="true">🗺️</span>
             <h3>4th, Geospatial Technology</h3>
             <p>TSA NJ State Conference, 2026. NYC urban heat island analysis in Python.</p>
         </article>
-        <article class="win win-yellow">
+        <article class="glass win">
             <span class="win-icon" aria-hidden="true">🧠</span>
             <h3>4th, Technology Bowl</h3>
             <p>TSA NJ State Conference, 2025, my first year in TSA.</p>
         </article>
-        <article class="win win-pink">
+        <article class="glass win">
             <span class="win-icon" aria-hidden="true">💻</span>
             <h3>AP CSP: 5</h3>
             <p>Self-studied AP Computer Science Principles outside of school (2026).</p>
         </article>
-        <article class="win win-teal">
+        <article class="glass win">
             <span class="win-icon" aria-hidden="true">🛠️</span>
             <h3>Hack Club Certifications</h3>
             <p>Fallout (60 hrs, prosthetic hands) and Capitol (36 hrs, LunchLoop).</p>
         </article>
-        <article class="win win-orange">
+        <article class="glass win">
             <span class="win-icon" aria-hidden="true">🔥</span>
             <h3>Congressional App Challenge</h3>
             <p>Submitted FireWatch, a wildfire-monitoring app, in 2026.</p>
         </article>
-        <article class="win win-yellow">
+        <article class="glass win">
             <span class="win-icon" aria-hidden="true">🎓</span>
             <h3>Dual Enrollment</h3>
             <p>Computer Programming I &amp; II through Fairleigh Dickinson University.</p>
         </article>
-        <article class="win win-pink">
+        <article class="glass win win-wide">
             <span class="win-icon" aria-hidden="true">💸</span>
             <h3>$1,000+ Raised</h3>
             <p>As Student Council Secretary, through homecoming and pep rallies.</p>
@@ -135,7 +144,8 @@
 
 <!-- ============ PROJECTS ============ -->
 <section id="projects" class="reveal">
-    <h2><span class="num">03</span> Projects</h2>
+    <p class="section-label">03 / Projects</p>
+    <h2>Things I've <span class="grad">built</span></h2>
 
     <div class="filters" role="group" aria-label="Filter projects">
         <button class="filter active" data-filter="all">All</button>
@@ -144,10 +154,83 @@
         <button class="filter" data-filter="data">Data</button>
     </div>
 
-    <!-- Prosthetic hand v1 -->
-    <article class="project card" data-cat="hardware">
+    <div class="projects">
+
+    <!-- Robotics -->
+    <article class="glass project" data-cat="hardware">
         <div class="project-head">
-            <h3>Joystick-Controlled Prosthetic Hand <span class="pill">v1</span></h3>
+            <span class="pill pill-hot">Rising All-Star</span>
+            <h3>Robotics Team Robot: "Wyatt"</h3>
+            <div class="chips"><span>Wiring</span><span>Swerve Drive</span><span>Hand Tools</span><span>Design Process</span></div>
+        </div>
+        <p>
+            Wyatt is our FRC robot, driven with a PS5 controller. It uses a swerve drive with four swerve modules,
+            each powered by a NEO motor and a NEO 550, plus a shooter that launches dodgeball-like game pieces. The
+            FIRST Mid-Atlantic game was basically basketball for robots: score in the hoops and defend against other
+            teams. I helped my team earn the Rising All-Star Award, and we placed 8th at our first competition.
+        </p>
+        <details>
+            <summary>Process &amp; challenges</summary>
+            <ul>
+                <li>About 10 hours a week of work during the season.</li>
+                <li>Wiring took constant checking for errors, and I learned to ask for help when I needed it.</li>
+                <li>Got a working robot with help from teammates, mentors, and online tutorials.</li>
+            </ul>
+        </details>
+        <div class="media">
+            <img src="trophy.png" alt="The 2026 Rising All-Star Award trophy" class="tall">
+        </div>
+        <div class="buttons">
+            <a class="btn btn-small" href="https://www.instagram.com/mcst.robotics/" target="_blank" rel="noopener">Robotics Instagram ↗</a>
+        </div>
+    </article>
+
+    <!-- FireWatch -->
+    <article class="glass project" data-cat="software hardware">
+        <div class="project-head">
+            <span class="pill pill-hot">Congressional App Challenge</span>
+            <h3>FireWatch</h3>
+            <div class="chips"><span>Python</span><span>FastAPI</span><span>OpenCV</span><span>Raspberry Pi</span></div>
+        </div>
+        <p>
+            A wildfire-monitoring web app. Raspberry Pi devices combine camera images (processed with OpenCV) and a
+            thermal sensor to flag possible fires and report them to a FastAPI server. The site maps those events
+            alongside NASA FIRMS satellite data and plans driving, biking, or walking routes that avoid fire zones.
+            Anyone can set up their own camera, and flagged events are confirmed by the camera's owner, since
+            automatic detection can make mistakes.
+        </p>
+        <div class="buttons">
+            <a class="btn btn-small" href="https://firewatch-deployment.onrender.com" target="_blank" rel="noopener">Live site ↗</a>
+            <a class="btn btn-small btn-ghost" href="https://github.com/magicKansh/firewatch_deployment" target="_blank" rel="noopener">Source code ↗</a>
+        </div>
+    </article>
+
+    <!-- Prosthetic hand v2 -->
+    <article class="glass project" data-cat="hardware">
+        <div class="project-head">
+            <span class="pill">v2</span>
+            <h3>Prosthetic Hand</h3>
+            <div class="chips"><span>C++</span><span>Arduino</span><span>NEMA 17 Steppers</span><span>Onshape</span></div>
+        </div>
+        <p>
+            For my second hand, I switched to NEMA 17 stepper motors for more force and control and designed the
+            parts in Onshape. I spent over 60 hours planning and testing it through Hack Club's Fallout program.
+        </p>
+        <details>
+            <summary>Process &amp; challenges</summary>
+            <ul>
+                <li>At first, the fingers barely moved.</li>
+                <li>I redesigned the strings running through each finger so they pulled tighter, making the movement clear and strong.</li>
+                <li>Next up: fingertip force sensors so the hand can feel how hard it's gripping.</li>
+            </ul>
+        </details>
+    </article>
+
+    <!-- Prosthetic hand v1 -->
+    <article class="glass project" data-cat="hardware">
+        <div class="project-head">
+            <span class="pill">v1</span>
+            <h3>Joystick-Controlled Prosthetic Hand</h3>
             <div class="chips"><span>C++</span><span>Arduino</span><span>TinkerCAD</span></div>
         </div>
         <p>
@@ -207,102 +290,15 @@ void loop() {
             </video>
         </div>
         <div class="buttons">
-            <a class="btn" href="https://docs.google.com/presentation/d/1TC9spTNmw4XEXiRIFN0Adl8-0rSRTootbSmiq-QF7CA/edit?slide=id.p#slide=id.p" target="_blank" rel="noopener">Project Documentation</a>
-        </div>
-    </article>
-
-    <!-- Prosthetic hand v2 -->
-    <article class="project card" data-cat="hardware">
-        <div class="project-head">
-            <h3>Prosthetic Hand <span class="pill">v2</span></h3>
-            <div class="chips"><span>C++</span><span>Arduino</span><span>NEMA 17 Steppers</span><span>Onshape</span></div>
-        </div>
-        <p>
-            For my second hand, I switched to NEMA 17 stepper motors for more force and control and designed the
-            parts in Onshape. I spent over 60 hours planning and testing it through Hack Club's Fallout program.
-        </p>
-        <details>
-            <summary>Process &amp; challenges</summary>
-            <ul>
-                <li>At first, the fingers barely moved.</li>
-                <li>I redesigned the strings running through each finger so they pulled tighter, making the movement clear and strong.</li>
-                <li>Next up: fingertip force sensors so the hand can feel how hard it's gripping.</li>
-            </ul>
-        </details>
-    </article>
-
-    <!-- FireWatch -->
-    <article class="project card" data-cat="software hardware">
-        <div class="project-head">
-            <h3>FireWatch <span class="pill pill-hot">Congressional App Challenge</span></h3>
-            <div class="chips"><span>Python</span><span>FastAPI</span><span>OpenCV</span><span>Raspberry Pi</span></div>
-        </div>
-        <p>
-            A wildfire-monitoring web app. Raspberry Pi devices combine camera images (processed with OpenCV) and a
-            thermal sensor to flag possible fires and report them to a FastAPI server. The site maps those events
-            alongside NASA FIRMS satellite data and plans driving, biking, or walking routes that avoid fire zones.
-            Anyone can set up their own camera, and flagged events are confirmed by the camera's owner, since
-            automatic detection can make mistakes.
-        </p>
-        <div class="buttons">
-            <a class="btn" href="https://firewatch-deployment.onrender.com" target="_blank" rel="noopener">Live Site</a>
-            <a class="btn btn-alt" href="https://github.com/magicKansh/firewatch_deployment" target="_blank" rel="noopener">Source Code</a>
-        </div>
-    </article>
-
-    <!-- LunchLoop -->
-    <article class="project card" data-cat="software data">
-        <div class="project-head">
-            <h3>LunchLoop <span class="pill">Hack Club hackathon</span></h3>
-            <div class="chips"><span>Python</span><span>pandas</span><span>FastAPI</span><span>React</span></div>
-        </div>
-        <p>
-            Built with a team I met at a hackathon: a web app that helps school cafeterias predict how much food to
-            prepare. It forecasts demand from past meals and attendance, adds a safety buffer so no one goes without
-            a meal, and lets students vote on upcoming menus. In our simulated school, it found over $1,000 in
-            savings and a way to cut food waste by about 47%.
-        </p>
-        <div class="buttons">
-            <a class="btn" href="https://larpathon-capitol.github.io/lunchloop/" target="_blank" rel="noopener">Live Site</a>
-            <a class="btn btn-alt" href="https://github.com/Larpathon-Capitol/lunchloop" target="_blank" rel="noopener">Source Code</a>
-        </div>
-    </article>
-
-    <!-- Gamlect -->
-    <article class="project card" data-cat="hardware">
-        <div class="project-head">
-            <h3>Gamlect: Coral Gamete Collector</h3>
-            <div class="chips"><span>Onshape</span><span>3D Printing</span><span>Product Testing</span></div>
-        </div>
-        <p>
-            Working with our neighboring Academy of Biotechnology, my team designed a system inspired by nature to
-            collect coral gametes during the rare coral spawning event. I led the CAD. After three months, we had a
-            3D-printed collector that could gather agar-like gamete replicas, with a side box for a camera to monitor
-            flow and a collection box at the top.
-        </p>
-        <details>
-            <summary>Process &amp; challenges</summary>
-            <ul>
-                <li>Recalibrated many measurements after running into sizing errors.</li>
-                <li>Wrote clear documentation, which taught me how to describe a product precisely.</li>
-                <li>Material and printing limits meant many rounds of CAD adjustments.</li>
-            </ul>
-        </details>
-        <div class="media">
-            <video controls preload="metadata">
-                <source src="cad.mp4" type="video/mp4">
-            </video>
-        </div>
-        <div class="buttons">
-            <a class="btn" href="https://cad.onshape.com/documents/6f3efc8606537e76b9a036a9/w/da372350352faa7c1f316d4a/e/9dedb0928d59d53344df6763?renderMode=0&amp;uiState=6a104cbb2014af084195cbf1" target="_blank" rel="noopener">Onshape CAD</a>
-            <a class="btn btn-alt" href="https://docs.google.com/presentation/d/1x4TAer9qMEF2nMa_VMQ8C2oHFYKpV9djLpQZnI1w16g/edit?usp=sharing" target="_blank" rel="noopener">Project Documentation</a>
+            <a class="btn btn-small" href="https://docs.google.com/presentation/d/1TC9spTNmw4XEXiRIFN0Adl8-0rSRTootbSmiq-QF7CA/edit?slide=id.p#slide=id.p" target="_blank" rel="noopener">Project documentation ↗</a>
         </div>
     </article>
 
     <!-- TSA Geospatial -->
-    <article class="project card" data-cat="data software">
+    <article class="glass project" data-cat="data software">
         <div class="project-head">
-            <h3>NYC Urban Heat Island Analysis <span class="pill pill-hot">4th at TSA States</span></h3>
+            <span class="pill pill-hot">4th at TSA States</span>
+            <h3>NYC Urban Heat Island Analysis</h3>
             <div class="chips"><span>Python</span><span>rasterio</span><span>NumPy</span><span>Matplotlib</span></div>
         </div>
         <p>
@@ -348,55 +344,82 @@ with rasterio.open(heatmap_raster_path) as src:
             <img src="graph.png" alt="Before and after heat map of New York City">
         </div>
         <div class="buttons">
-            <a class="btn" href="https://canva.link/zms0t4kmhmxukpt" target="_blank" rel="noopener">TSA Portfolio</a>
+            <a class="btn btn-small" href="https://canva.link/zms0t4kmhmxukpt" target="_blank" rel="noopener">TSA portfolio ↗</a>
         </div>
     </article>
 
-    <!-- Robotics -->
-    <article class="project card" data-cat="hardware">
+    <!-- LunchLoop -->
+    <article class="glass project" data-cat="software data">
         <div class="project-head">
-            <h3>Robotics Team Robot: "Wyatt" <span class="pill pill-hot">Rising All-Star</span></h3>
-            <div class="chips"><span>Wiring</span><span>Swerve Drive</span><span>Hand Tools</span><span>Design Process</span></div>
+            <span class="pill">Hack Club hackathon</span>
+            <h3>LunchLoop</h3>
+            <div class="chips"><span>Python</span><span>pandas</span><span>FastAPI</span><span>React</span></div>
         </div>
         <p>
-            Wyatt is our FRC robot, driven with a PS5 controller. It uses a swerve drive with four swerve modules,
-            each powered by a NEO motor and a NEO 550, plus a shooter that launches dodgeball-like game pieces. The
-            FIRST Mid-Atlantic game was basically basketball for robots: score in the hoops and defend against other
-            teams. I helped my team earn the Rising All-Star Award, and we placed 8th at our first competition.
+            Built with a team I met at a hackathon: a web app that helps school cafeterias predict how much food to
+            prepare. It forecasts demand from past meals and attendance, adds a safety buffer so no one goes without
+            a meal, and lets students vote on upcoming menus. In our simulated school, it found over $1,000 in
+            savings and a way to cut food waste by about 47%.
+        </p>
+        <div class="buttons">
+            <a class="btn btn-small" href="https://larpathon-capitol.github.io/lunchloop/" target="_blank" rel="noopener">Live site ↗</a>
+            <a class="btn btn-small btn-ghost" href="https://github.com/Larpathon-Capitol/lunchloop" target="_blank" rel="noopener">Source code ↗</a>
+        </div>
+    </article>
+
+    <!-- Gamlect -->
+    <article class="glass project" data-cat="hardware">
+        <div class="project-head">
+            <span class="pill">CAD lead</span>
+            <h3>Gamlect: Coral Gamete Collector</h3>
+            <div class="chips"><span>Onshape</span><span>3D Printing</span><span>Product Testing</span></div>
+        </div>
+        <p>
+            Working with our neighboring Academy of Biotechnology, my team designed a system inspired by nature to
+            collect coral gametes during the rare coral spawning event. I led the CAD. After three months, we had a
+            3D-printed collector that could gather agar-like gamete replicas, with a side box for a camera to monitor
+            flow and a collection box at the top.
         </p>
         <details>
             <summary>Process &amp; challenges</summary>
             <ul>
-                <li>About 10 hours a week of work during the season.</li>
-                <li>Wiring took constant checking for errors, and I learned to ask for help when I needed it.</li>
-                <li>Got a working robot with help from teammates, mentors, and online tutorials.</li>
+                <li>Recalibrated many measurements after running into sizing errors.</li>
+                <li>Wrote clear documentation, which taught me how to describe a product precisely.</li>
+                <li>Material and printing limits meant many rounds of CAD adjustments.</li>
             </ul>
         </details>
         <div class="media">
-            <img src="trophy.png" alt="Robotics team trophy" class="tall">
+            <video controls preload="metadata">
+                <source src="cad.mp4" type="video/mp4">
+            </video>
         </div>
         <div class="buttons">
-            <a class="btn" href="https://www.instagram.com/mcst.robotics/" target="_blank" rel="noopener">Robotics Instagram</a>
+            <a class="btn btn-small" href="https://cad.onshape.com/documents/6f3efc8606537e76b9a036a9/w/da372350352faa7c1f316d4a/e/9dedb0928d59d53344df6763?renderMode=0&amp;uiState=6a104cbb2014af084195cbf1" target="_blank" rel="noopener">Onshape CAD ↗</a>
+            <a class="btn btn-small btn-ghost" href="https://docs.google.com/presentation/d/1x4TAer9qMEF2nMa_VMQ8C2oHFYKpV9djLpQZnI1w16g/edit?usp=sharing" target="_blank" rel="noopener">Documentation ↗</a>
         </div>
     </article>
+
+    </div>
 </section>
 
 <!-- ============ LEADERSHIP ============ -->
 <section id="leadership" class="reveal">
-    <h2><span class="num">04</span> Leadership &amp; Service</h2>
+    <p class="section-label">04 / Leadership</p>
+    <h2>Leadership &amp; <span class="grad">service</span></h2>
     <div class="lead-grid">
-        <div class="card lead"><h3>🤖 Robotics Team President</h3><p class="when">2026–present · Mechanical Leader 2025–26</p><p>Lead the team and teach new members the engineering design process. FRC and FTC.</p></div>
-        <div class="card lead"><h3>📣 Student Advocacy Panel</h3><p class="when">2026–present</p><p>Gather classmates' input and push for changes to school services.</p></div>
-        <div class="card lead"><h3>🗳️ Student Council Secretary</h3><p class="when">2025–26</p><p>Helped raise $1,000+ through homecoming and pep rallies; attended leadership conferences.</p></div>
-        <div class="card lead"><h3>🏕️ STEM Camp Counselor</h3><p class="when">Summer 2025</p><p>Taught kids robotics, Arduino, and Onshape at the MCST STEM Summer Camp and the Essex County 4-H camp.</p></div>
-        <div class="card lead"><h3>💛 Mind4Youth Volunteer</h3><p class="when">Fall 2024</p><p>Designed and produced positive-affirmation cards for a teen mental health organization (23 hours).</p></div>
-        <div class="card lead"><h3>📸 Yearbook Staff</h3><p class="when">2026–27</p><p>Helping tell our school's story this year.</p></div>
+        <div class="glass lead"><h3>Robotics Team President</h3><p class="when">2026–present · Mechanical Leader 2025–26</p><p>Lead the team and teach new members the engineering design process. FRC and FTC.</p></div>
+        <div class="glass lead"><h3>Student Advocacy Panel</h3><p class="when">2026–present</p><p>Gather classmates' input and push for changes to school services.</p></div>
+        <div class="glass lead"><h3>Student Council Secretary</h3><p class="when">2025–26</p><p>Helped raise $1,000+ through homecoming and pep rallies; attended leadership conferences.</p></div>
+        <div class="glass lead"><h3>STEM Camp Counselor</h3><p class="when">Summer 2025</p><p>Taught kids robotics, Arduino, and Onshape at the MCST STEM Summer Camp and the Essex County 4-H camp.</p></div>
+        <div class="glass lead"><h3>Mind4Youth Volunteer</h3><p class="when">Fall 2024</p><p>Designed and produced positive-affirmation cards for a teen mental health organization (23 hours).</p></div>
+        <div class="glass lead"><h3>Yearbook Staff</h3><p class="when">2026–27</p><p>Helping tell our school's story this year.</p></div>
     </div>
 </section>
 
 <!-- ============ TIMELINE ============ -->
 <section id="timeline" class="reveal">
-    <h2><span class="num">05</span> Timeline</h2>
+    <p class="section-label">05 / Timeline</p>
+    <h2>How I <span class="grad">got here</span></h2>
     <ol class="timeline">
         <li><span class="t-date">Fall 2024</span><p>Started high school. Joined robotics and TSA, and volunteered with Mind4Youth.</p></li>
         <li><span class="t-date">Spring 2025</span><p>4th place in Technology Bowl at the TSA NJ State Conference.</p></li>
@@ -410,13 +433,14 @@ with rasterio.open(heatmap_raster_path) as src:
 
 <!-- ============ CONTACT ============ -->
 <section id="contact" class="reveal">
-    <div class="contact-card">
-        <h2>Let's build something.</h2>
-        <p>Want to talk robotics, code, or a project idea? Reach out!</p>
+    <div class="glass contact-card">
+        <p class="section-label">06 / Contact</p>
+        <h2>Let's build <span class="grad">something.</span></h2>
+        <p>Want to talk robotics, code, or a project idea? Reach out.</p>
         <div class="buttons">
-            <a class="btn btn-big" href="mailto:ekansh.simgekar@mcvts.org">✉️ Email Me</a>
-            <a class="btn btn-big btn-alt" href="https://github.com/magicKansh" target="_blank" rel="noopener">🐙 GitHub</a>
-            <a class="btn btn-big btn-alt" href="https://canva.link/9kr9olnwmzx9a7y" target="_blank" rel="noopener">📄 Resume</a>
+            <a class="btn btn-primary" href="mailto:ekansh.simgekar@mcvts.org">Email me</a>
+            <a class="btn btn-ghost" href="https://github.com/magicKansh" target="_blank" rel="noopener">GitHub ↗</a>
+            <a class="btn btn-ghost" href="https://canva.link/9kr9olnwmzx9a7y" target="_blank" rel="noopener">Resume ↗</a>
         </div>
     </div>
 </section>
@@ -424,14 +448,16 @@ with rasterio.open(heatmap_raster_path) as src:
 </main>
 
 <footer>
-    <p>Made with ☕ and way too many jumper wires · Ekansh Simgekar</p>
+    <p>© 2026 Ekansh Simgekar · Designed and built by hand (and a few jumper wires)</p>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="scene.js"></script>
 <script>
 // Scroll-reveal sections
 const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('shown'); io.unobserve(e.target); } });
-}, { threshold: 0.12 });
+}, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
 // Project filters
@@ -445,6 +471,18 @@ document.querySelectorAll('.filter').forEach(btn => {
         });
     });
 });
+
+// Subtle 3D tilt on the hero photo
+const card = document.querySelector('.photo-card');
+if (card && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = `rotateY(${x * 14}deg) rotateX(${-y * 14}deg)`;
+    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+}
 </script>
 
 </body>
